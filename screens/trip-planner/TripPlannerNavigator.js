@@ -1,22 +1,30 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { createStackNavigator, HeaderTitle } from "@react-navigation/stack";
+import React from "react";
 
-const TripPlannerNavigator = () => {
-    return (
-        <View style={styles.container} >
-            <Text>Trip PlannerNavigator</Text>
-            <Text>Trip PlannerNavigator</Text>
-            <Text>Trip PlannerNavigator</Text>
-        </View>
-    )
+import TripPlannerHomeScreen from "./TripPlannerHomeScreen";
+import TripPlannerResultsNavigator from "./TripPlannerResultsNavigator";
+
+const Stack = createStackNavigator();
+
+export default function TripPlannerNavigator() {
+  return (
+    <Stack.Navigator
+      initialRouteName="TripPlanner Home"
+      screenOptions={{
+        gestureEnabled: false,
+        headerTitleStyle: { fontSize: 18 }
+      }}
+    >
+      <Stack.Screen
+        name="TripPlanner Home"
+        component={TripPlannerHomeScreen}
+        options={{ title: "Trip Planner", headerTitleAlign: "center" }}
+      />
+      <Stack.Screen
+        name="TripPlanner Results Navigator"
+        component={TripPlannerResultsNavigator}
+        options={{ title: "Results", headerTitleAlign: "center" }}
+      />
+    </Stack.Navigator>
+  );
 }
-
-export default TripPlannerNavigator
-
-const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        alignItems:'center',
-        justifyContent:'center'
-    }
-})
