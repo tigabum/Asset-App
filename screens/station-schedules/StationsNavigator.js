@@ -25,6 +25,7 @@ const StationsNavigator = () => {
         const [favorite, setFavorite] = useState({});
        
         function updateFavoriteStatus(){
+          
 
         }
       
