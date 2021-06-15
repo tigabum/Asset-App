@@ -14,15 +14,35 @@ export default function App() {
     colorScheme === "dark" ? "light-content" : "dark-content";
   const darkThemeContainer =
     colorScheme === "dark" ? styles.darkThemeContainer : null;
-  return (
+    let user = null;
+   
+       return (
       <Provider store={store}>
         <StatusBar barStyle={statusBarStyle} />
-    
+  
       <SafeAreaView style={styles.container}>
         <Navigation />
       </SafeAreaView>
+    
+      
     </Provider>
   );
+
+  //   }else{
+  //     return (
+  //     <Provider store={store}>
+  //       {/* <StatusBar barStyle={statusBarStyle} />
+  
+  //     <SafeAreaView style={styles.container}>
+  //       <Navigation />
+  //     </SafeAreaView> */}
+  //     <View><Text>Login </Text></View>
+    
+      
+  //   </Provider>
+  // );
+  //   }
+  
 }
 
 const styles = StyleSheet.create({

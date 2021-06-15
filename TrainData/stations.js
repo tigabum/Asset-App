@@ -1,7 +1,7 @@
 module.exports.stations = {
   station: [
     {
-      name: "12th St. Oakland City Center",
+      name: "Civil Service College",
       abbr: "12TH",
       gtfs_latitude: "37.803768",
       gtfs_longitude: "-122.271450",
@@ -12,7 +12,7 @@ module.exports.stations = {
       zipcode: "94612"
     },
     {
-      name: "16th St. Mission",
+      name: "Gurd Shola",
       abbr: "16TH",
       gtfs_latitude: "37.765062",
       gtfs_longitude: "-122.419694",
@@ -23,7 +23,7 @@ module.exports.stations = {
       zipcode: "94110"
     },
     {
-      name: "19th St. Oakland",
+      name: "Hayo Hulet Mazoria",
       abbr: "19TH",
       gtfs_latitude: "37.808350",
       gtfs_longitude: "-122.268602",
@@ -34,7 +34,7 @@ module.exports.stations = {
       zipcode: "94612"
     },
     {
-      name: "24th St. Mission",
+      name: "Lem Hotel",
       abbr: "24TH",
       gtfs_latitude: "37.752470",
       gtfs_longitude: "-122.418143",
@@ -56,7 +56,7 @@ module.exports.stations = {
       zipcode: "94509"
     },
     {
-      name: "Ashby",
+      name: "Meganagna",
       abbr: "ASHB",
       gtfs_latitude: "37.852803",
       gtfs_longitude: "-122.270062",
@@ -67,7 +67,7 @@ module.exports.stations = {
       zipcode: "94703"
     },
     {
-      name: "Balboa Park",
+      name: "Stadium",
       abbr: "BALB",
       gtfs_latitude: "37.721585",
       gtfs_longitude: "-122.447506",
@@ -78,7 +78,7 @@ module.exports.stations = {
       zipcode: "94112"
     },
     {
-      name: "Bay Fair",
+      name: "Urael Church",
       abbr: "BAYF",
       gtfs_latitude: "37.696924",
       gtfs_longitude: "-122.126514",
@@ -89,7 +89,7 @@ module.exports.stations = {
       zipcode: "94578"
     },
     {
-      name: "Berryessa/North San Jose",
+      name: "Meskel Square",
       abbr: "BERY",
       gtfs_latitude: "37.368473",
       gtfs_longitude: "-121.874681",
@@ -100,7 +100,7 @@ module.exports.stations = {
       zipcode: "95133"
     },
     {
-      name: "Castro Valley",
+      name: "La Gare",
       abbr: "CAST",
       gtfs_latitude: "37.690746",
       gtfs_longitude: "-122.075602",
@@ -111,7 +111,7 @@ module.exports.stations = {
       zipcode: "94546"
     },
     {
-      name: "Civic Center/UN Plaza",
+      name: "Mexico Square",
       abbr: "CIVC",
       gtfs_latitude: "37.779732",
       gtfs_longitude: "-122.414123",
@@ -122,7 +122,7 @@ module.exports.stations = {
       zipcode: "94102"
     },
     {
-      name: "Coliseum",
+      name: "Coca Cola",
       abbr: "COLS",
       gtfs_latitude: "37.753661",
       gtfs_longitude: "-122.196869",
@@ -133,7 +133,7 @@ module.exports.stations = {
       zipcode: "94621"
     },
     {
-      name: "Colma",
+      name: "Tor Hailoch",
       abbr: "COLM",
       gtfs_latitude: "37.684638",
       gtfs_longitude: "-122.466233",
@@ -155,7 +155,7 @@ module.exports.stations = {
       zipcode: "94520"
     },
     {
-      name: "Daly City",
+      name: "Ayat 2",
       abbr: "DALY",
       gtfs_latitude: "37.706121",
       gtfs_longitude: "-122.469081",
@@ -177,7 +177,7 @@ module.exports.stations = {
       zipcode: "94704"
     },
     {
-      name: "Dublin/Pleasanton",
+      name: "Lideta",
       abbr: "DUBL",
       gtfs_latitude: "37.701687",
       gtfs_longitude: "-121.899179",
@@ -210,7 +210,7 @@ module.exports.stations = {
       zipcode: "94530"
     },
     {
-      name: "Embarcadero",
+      name: "Ayat 1",
       abbr: "EMBR",
       gtfs_latitude: "37.792874",
       gtfs_longitude: "-122.397020",
@@ -221,7 +221,7 @@ module.exports.stations = {
       zipcode: "94111"
     },
     {
-      name: "Fremont",
+      name: "Abinet",
       abbr: "FRMT",
       gtfs_latitude: "37.557465",
       gtfs_longitude: "-121.976608",
@@ -232,7 +232,7 @@ module.exports.stations = {
       zipcode: "94536"
     },
     {
-      name: "Fruitvale",
+      name: "Merkato",
       abbr: "FTVL",
       gtfs_latitude: "37.774836",
       gtfs_longitude: "-122.224175",
@@ -243,7 +243,7 @@ module.exports.stations = {
       zipcode: "94601"
     },
     {
-      name: "Glen Park",
+      name: "Menelik II Square",
       abbr: "GLEN",
       gtfs_latitude: "37.733064",
       gtfs_longitude: "-122.433817",
@@ -254,7 +254,7 @@ module.exports.stations = {
       zipcode: "94131"
     },
     {
-      name: "Hayward",
+      name: "Saris",
       abbr: "HAYW",
       gtfs_latitude: "37.669723",
       gtfs_longitude: "-122.087018",
@@ -276,7 +276,7 @@ module.exports.stations = {
       zipcode: "94549"
     },
     {
-      name: "Lake Merritt",
+      name: "Se-Halite Mehret Church",
       abbr: "LAKE",
       gtfs_latitude: "37.797027",
       gtfs_longitude: "-122.265180",
@@ -287,7 +287,7 @@ module.exports.stations = {
       zipcode: "94607"
     },
     {
-      name: "MacArthur",
+      name: "Saint Michael Church",
       abbr: "MCAR",
       gtfs_latitude: "37.829065",
       gtfs_longitude: "-122.267040",
@@ -298,7 +298,7 @@ module.exports.stations = {
       zipcode: "94609"
     },
     {
-      name: "Millbrae",
+      name: "CMC 1",
       abbr: "MLBR",
       gtfs_latitude: "37.600271",
       gtfs_longitude: "-122.386702",
@@ -309,7 +309,7 @@ module.exports.stations = {
       zipcode: "94030"
     },
     {
-      name: "Milpitas",
+      name: "Meri / CMC 2",
       abbr: "MLPT",
       gtfs_latitude: "37.410277",
       gtfs_longitude: "-121.891081",
@@ -320,7 +320,7 @@ module.exports.stations = {
       zipcode: "95035"
     },
     {
-      name: "Montgomery St.",
+      name: "Sebategna",
       abbr: "MONT",
       gtfs_latitude: "37.789405",
       gtfs_longitude: "-122.401066",
@@ -331,7 +331,7 @@ module.exports.stations = {
       zipcode: "94104"
     },
     {
-      name: "Summit",
+      name: "Atikilt Tera",
       abbr: "NBRK",
       gtfs_latitude: "37.873967",
       gtfs_longitude: "-122.283440",
@@ -342,7 +342,7 @@ module.exports.stations = {
       zipcode: "94702"
     },
     {
-      name: "Piyassa",
+      name: "Meshualekia",
       abbr: "NCON",
       gtfs_latitude: "38.003193",
       gtfs_longitude: "-122.024653",
@@ -353,7 +353,7 @@ module.exports.stations = {
       zipcode: "94520"
     },
     {
-      name: "Oakland International Airport",
+      name: "Lancia",
       abbr: "OAKL",
       gtfs_latitude: "37.713238",
       gtfs_longitude: "-122.212191",
@@ -364,7 +364,7 @@ module.exports.stations = {
       zipcode: "94621"
     },
     {
-      name: "CMC",
+      name: "Gottera 1",
       abbr: "ORIN",
       gtfs_latitude: "37.878361",
       gtfs_longitude: "-122.183791",
@@ -375,7 +375,7 @@ module.exports.stations = {
       zipcode: "94563"
     },
     {
-      name: "Lideta",
+      name: "Gottera 2",
       abbr: "PITT",
       gtfs_latitude: "38.018914",
       gtfs_longitude: "-121.945154",
@@ -386,7 +386,7 @@ module.exports.stations = {
       zipcode: "94565"
     },
     {
-      name: "Lideta Center",
+      name: "Nifas Silk",
       abbr: "PCTR",
       gtfs_latitude: "38.016941",
       gtfs_longitude: "-121.889457",
@@ -397,7 +397,7 @@ module.exports.stations = {
       zipcode: "94565"
     },
     {
-      name: "Stadium",
+      name: "Saris Geseya",
       abbr: "PHIL",
       gtfs_latitude: "37.928468",
       gtfs_longitude: "-122.056012",
@@ -408,7 +408,7 @@ module.exports.stations = {
       zipcode: "94597"
     },
     {
-      name: "Powell St.",
+      name: "Dama Hotel",
       abbr: "POWL",
       gtfs_latitude: "37.784471",
       gtfs_longitude: "-122.407974",
@@ -419,7 +419,7 @@ module.exports.stations = {
       zipcode: "94102"
     },
     {
-      name: "Megenagna",
+      name: "Abo Church Junction",
       abbr: "RICH",
       gtfs_latitude: "37.936853",
       gtfs_longitude: "-122.353099",
@@ -430,7 +430,7 @@ module.exports.stations = {
       zipcode: "94801"
     },
     {
-      name: "Rockridge",
+      name: "Kaliti",
       abbr: "ROCK",
       gtfs_latitude: "37.844702",
       gtfs_longitude: "-122.251371",
@@ -440,115 +440,115 @@ module.exports.stations = {
       state: "CA",
       zipcode: "94618"
     },
-    {
-      name: "San Bruno",
-      abbr: "SBRN",
-      gtfs_latitude: "37.637761",
-      gtfs_longitude: "-122.416287",
-      address: "1151 Huntington Avenue",
-      city: "San Bruno",
-      county: "sanmateo",
-      state: "CA",
-      zipcode: "94066"
-    },
-    {
-      name: "San Francisco International Airport",
-      abbr: "SFIA",
-      gtfs_latitude: "37.615966",
-      gtfs_longitude: "-122.392409",
-      address: "International Terminal, Level 3",
-      city: "San Francisco Int'l Airport",
-      county: "sanmateo",
-      state: "CA",
-      zipcode: "94128"
-    },
-    {
-      name: "San Leandro",
-      abbr: "SANL",
-      gtfs_latitude: "37.721947",
-      gtfs_longitude: "-122.160844",
-      address: "1401 San Leandro Blvd.",
-      city: "San Leandro",
-      county: "alameda",
-      state: "CA",
-      zipcode: "94577"
-    },
-    {
-      name: "South Hayward",
-      abbr: "SHAY",
-      gtfs_latitude: "37.634375",
-      gtfs_longitude: "-122.057189",
-      address: "28601 Dixon Street",
-      city: "Hayward",
-      county: "alameda",
-      state: "CA",
-      zipcode: "94544"
-    },
-    {
-      name: "South San Francisco",
-      abbr: "SSAN",
-      gtfs_latitude: "37.664245",
-      gtfs_longitude: "-122.443960",
-      address: "1333 Mission Road",
-      city: "South San Francisco",
-      county: "sanmateo",
-      state: "CA",
-      zipcode: "94080"
-    },
-    {
-      name: "Union City",
-      abbr: "UCTY",
-      gtfs_latitude: "37.590630",
-      gtfs_longitude: "-122.017388",
-      address: "10 Union Square",
-      city: "Union City",
-      county: "alameda",
-      state: "CA",
-      zipcode: "94587"
-    },
-    {
-      name: "Walnut Creek",
-      abbr: "WCRK",
-      gtfs_latitude: "37.905522",
-      gtfs_longitude: "-122.067527",
-      address: "200 Ygnacio Valley Road",
-      city: "Walnut Creek",
-      county: "contracosta",
-      state: "CA",
-      zipcode: "94596"
-    },
-    {
-      name: "Warm Springs/South Fremont",
-      abbr: "WARM",
-      gtfs_latitude: "37.502171",
-      gtfs_longitude: "-121.939313",
-      address: "45193 Warm Springs Blvd",
-      city: "Fremont",
-      county: "alameda",
-      state: "CA",
-      zipcode: "94539"
-    },
-    {
-      name: "West Dublin/Pleasanton",
-      abbr: "WDUB",
-      gtfs_latitude: "37.699756",
-      gtfs_longitude: "-121.928240",
-      address: "6501 Golden Gate Drive",
-      city: "Dublin",
-      county: "alameda",
-      state: "CA",
-      zipcode: "94568"
-    },
-    {
-      name: "West Oakland",
-      abbr: "WOAK",
-      gtfs_latitude: "37.804872",
-      gtfs_longitude: "-122.295140",
-      address: "1451 7th Street",
-      city: "Oakland",
-      county: "alameda",
-      state: "CA",
-      zipcode: "94607"
-    }
+    // {
+    //   name: "San Bruno",
+    //   abbr: "SBRN",
+    //   gtfs_latitude: "37.637761",
+    //   gtfs_longitude: "-122.416287",
+    //   address: "1151 Huntington Avenue",
+    //   city: "San Bruno",
+    //   county: "sanmateo",
+    //   state: "CA",
+    //   zipcode: "94066"
+    // },
+    // {
+    //   name: "San Francisco International Airport",
+    //   abbr: "SFIA",
+    //   gtfs_latitude: "37.615966",
+    //   gtfs_longitude: "-122.392409",
+    //   address: "International Terminal, Level 3",
+    //   city: "San Francisco Int'l Airport",
+    //   county: "sanmateo",
+    //   state: "CA",
+    //   zipcode: "94128"
+    // },
+    // {
+    //   name: "San Leandro",
+    //   abbr: "SANL",
+    //   gtfs_latitude: "37.721947",
+    //   gtfs_longitude: "-122.160844",
+    //   address: "1401 San Leandro Blvd.",
+    //   city: "San Leandro",
+    //   county: "alameda",
+    //   state: "CA",
+    //   zipcode: "94577"
+    // },
+    // {
+    //   name: "South Hayward",
+    //   abbr: "SHAY",
+    //   gtfs_latitude: "37.634375",
+    //   gtfs_longitude: "-122.057189",
+    //   address: "28601 Dixon Street",
+    //   city: "Hayward",
+    //   county: "alameda",
+    //   state: "CA",
+    //   zipcode: "94544"
+    // },
+    // {
+    //   name: "South San Francisco",
+    //   abbr: "SSAN",
+    //   gtfs_latitude: "37.664245",
+    //   gtfs_longitude: "-122.443960",
+    //   address: "1333 Mission Road",
+    //   city: "South San Francisco",
+    //   county: "sanmateo",
+    //   state: "CA",
+    //   zipcode: "94080"
+    // },
+    // {
+    //   name: "Union City",
+    //   abbr: "UCTY",
+    //   gtfs_latitude: "37.590630",
+    //   gtfs_longitude: "-122.017388",
+    //   address: "10 Union Square",
+    //   city: "Union City",
+    //   county: "alameda",
+    //   state: "CA",
+    //   zipcode: "94587"
+    // },
+    // {
+    //   name: "Walnut Creek",
+    //   abbr: "WCRK",
+    //   gtfs_latitude: "37.905522",
+    //   gtfs_longitude: "-122.067527",
+    //   address: "200 Ygnacio Valley Road",
+    //   city: "Walnut Creek",
+    //   county: "contracosta",
+    //   state: "CA",
+    //   zipcode: "94596"
+    // },
+    // {
+    //   name: "Warm Springs/South Fremont",
+    //   abbr: "WARM",
+    //   gtfs_latitude: "37.502171",
+    //   gtfs_longitude: "-121.939313",
+    //   address: "45193 Warm Springs Blvd",
+    //   city: "Fremont",
+    //   county: "alameda",
+    //   state: "CA",
+    //   zipcode: "94539"
+    // },
+    // {
+    //   name: "West Dublin/Pleasanton",
+    //   abbr: "WDUB",
+    //   gtfs_latitude: "37.699756",
+    //   gtfs_longitude: "-121.928240",
+    //   address: "6501 Golden Gate Drive",
+    //   city: "Dublin",
+    //   county: "alameda",
+    //   state: "CA",
+    //   zipcode: "94568"
+    // },
+    // {
+    //   name: "West Oakland",
+    //   abbr: "WOAK",
+    //   gtfs_latitude: "37.804872",
+    //   gtfs_longitude: "-122.295140",
+    //   address: "1451 7th Street",
+    //   city: "Oakland",
+    //   county: "alameda",
+    //   state: "CA",
+    //   zipcode: "94607"
+    // }
   ]
 };

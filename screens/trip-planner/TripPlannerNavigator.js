@@ -26,5 +26,5 @@ export default function TripPlannerNavigator() {
         options={{ title: "Results", headerTitleAlign: "center" }}
       />
     </Stack.Navigator>
-  );
+  ); 
 }

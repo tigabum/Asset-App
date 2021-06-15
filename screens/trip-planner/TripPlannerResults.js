@@ -105,7 +105,7 @@ export default function TripPlannerResults(props) {
                     </View>
                     <View>
                       <Text style={[styles.platformText, textStyle]}>
-                        {x["@trainHeadStation"]} Train
+                        {/* {x["@trainHeadStation"]} Train */} Train
                       </Text>
                     </View>
                   </View>
@@ -140,7 +140,7 @@ export default function TripPlannerResults(props) {
                     </View>
                     <View>
                       <Text style={[styles.platformText, textStyle]}>
-                        {x["@trainHeadStation"]} Train
+                        {/* {x["@trainHeadStation"]} Train */} Train
                       </Text>
                     </View>
                   </View>
