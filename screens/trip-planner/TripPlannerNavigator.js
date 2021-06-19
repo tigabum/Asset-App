@@ -1,5 +1,6 @@
 import { createStackNavigator, HeaderTitle } from "@react-navigation/stack";
 import React from "react";
+import Reservation from "./Reservation";
 
 import TripPlannerHomeScreen from "./TripPlannerHomeScreen";
 import TripPlannerResultsNavigator from "./TripPlannerResultsNavigator";
@@ -24,6 +25,11 @@ export default function TripPlannerNavigator() {
         name="TripPlanner Results Navigator"
         component={TripPlannerResultsNavigator}
         options={{ title: "Results", headerTitleAlign: "center" }}
+      />
+      <Stack.Screen
+      name="reservation"
+      component={Reservation}
+      options={{title:'Reservation', headerTitleAlign:'center'}}
       />
     </Stack.Navigator>
   ); 

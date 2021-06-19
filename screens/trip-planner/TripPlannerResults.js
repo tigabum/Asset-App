@@ -1,7 +1,8 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { Button, ScrollView, StyleSheet, Text, View,TouchableOpacity } from "react-native";
 import { useColorScheme } from "react-native-appearance";
+
 
 export default function TripPlannerResults(props) {
   const { trip } = props;
@@ -185,6 +186,13 @@ export default function TripPlannerResults(props) {
               Departures are subject to delays and may vary from real-time data.
             </Text>
           </View>
+          <View  style={styles.button}>
+             <TouchableOpacity onPress={()=>props.navigation.navigate("reservation")} style={{backgroundColor:'lightgray',padding:10,}} >
+               <Text style={{fontSize:25,}} >Reserve</Text>
+             </TouchableOpacity>
+
+          </View>
+         
         </View>
       </ScrollView>
     );
@@ -202,6 +210,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
+  },
+  button:{
+    marginTop:50,
+
   },
   tripBox: {
     marginBottom: 30,
