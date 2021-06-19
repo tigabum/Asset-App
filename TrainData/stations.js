@@ -1,16 +1,16 @@
 module.exports.stations = {
   station: [
-    {
-      name: "Civil Service College",
-      abbr: "12TH",
-      gtfs_latitude: "37.803768",
-      gtfs_longitude: "-122.271450",
-      address: "1245 Broadway",
-      city: "Oakland",
-      state: "CA",
-      county: "alameda",
-      zipcode: "94612"
-    },
+    // {
+    //   name: "Civil Service College",
+    //   abbr: "12TH",
+    //   gtfs_latitude: "37.803768",
+    //   gtfs_longitude: "-122.271450",
+    //   address: "1245 Broadway",
+    //   city: "Oakland",
+    //   state: "CA",
+    //   county: "alameda",
+    //   zipcode: "94612"
+    // },
     {
       name: "Gurd Shola",
       abbr: "16TH",

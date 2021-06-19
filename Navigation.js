@@ -24,43 +24,7 @@ export default function Navigation() {
      const Tab = createBottomTabNavigator();
      const scheme = useColorScheme();
      const iconColor = scheme === "dark" ? "white" : "gray";
-      const dispatch = useDispatch();
-        const userLocation = useSelector((state) => state.userLocation);
-          useEffect(() => {
-    receiveUserLocation();
-  }, []);
-  const receiveUserLocation = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
-
-    if (status !== "granted") {
-      dispatch({
-        type: "RECEIVE_USER_LOCATION",
-        // set user location to embarcadero if user doesn't grant location permission
-        payload: { latitude: 8.93190, longitude: 38.687726 },
-       
-      });
-    } else {
-      let location = await Location.getCurrentPositionAsync({
-        accuracy:
-          Platform.OS === "android"
-            ? Location.Accuracy.Lowest
-            : Location.Accuracy.Lowest,
-      });
-
-      // dispatch to redux store
-      // will be used to show closest stations and to center the live map.
-      dispatch({
-        type: "RECEIVE_USER_LOCATION",
-        payload: location.coords,
-      });
-
-      // add to firestore
-      // await db.collection('locations').add({latitude: location.coords.latitude, longitude: location.coords.longitude, timestamp: firebase.firestore.FieldValue.serverTimestamp()})
-    }
-  };
-  // if(user){
-  //   return <View><Text>Login</Text></View>
-  // }
+      const userLocation = useSelector((state) => state.userLocation);
      if (userLocation.coords.latitude !== null) {
         return (
          <NavigationContainer theme={scheme === "dark" ? DarkTheme : DefaultTheme} >

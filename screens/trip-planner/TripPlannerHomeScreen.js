@@ -31,26 +31,28 @@ const TripPlannerHomeScreen = (props) => {
   const [option, setOption] = useState("depart");
 
   const [departure, setDeparture] = useState({
-    abbr: "ASHB",
-    address: "3100 Adeline Street",
-    city: "Berkeley",
-    county: "alameda",
-    gtfs_latitude: "37.852803",
-    gtfs_longitude: "-122.270062",
-    name: "Ashby",
-    state: "CA",
-    zipcode: "94703",
+    
+      name: "Gurd Shola",
+      abbr: "16TH",
+      gtfs_latitude: "37.765062",
+      gtfs_longitude: "-122.419694",
+      address: "2000 Mission Street",
+      city: "San Francisco",
+      county: "sanfrancisco",
+      state: "CA",
+      zipcode: "94110"
+  
   });
   const [destination, setDestination] = useState({
-    abbr: "DUBL",
-    address: "5801 Owens Dr.",
-    city: "Pleasanton",
-    county: "alameda",
-    gtfs_latitude: "37.701687",
-    gtfs_longitude: "-121.899179",
-    name: "Dublin/Pleasanton",
-    state: "CA",
-    zipcode: "94588",
+    name: "Hayo Hulet Mazoria",
+      abbr: "19TH",
+      gtfs_latitude: "37.808350",
+      gtfs_longitude: "-122.268602",
+      address: "1900 Broadway",
+      city: "Oakland",
+      county: "alameda",
+      state: "CA",
+      zipcode: "94612"
   });
 
   const selectedLocalTime = moment(selectedTime).format("hh:mma");
