@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import MapView, { Polyline } from 'react-native-maps';
 import { useIsFocused } from "@react-navigation/native";
 import { useColorScheme } from "react-native-appearance";
+import Markers from './components/Marker';
 
 
 const LiveMapScreen = () => {
@@ -17,13 +18,17 @@ const LiveMapScreen = () => {
      const latitude = userLocation.coords.latitude;
      const longitude = userLocation.coords.longitude;
 
-     
-    return (
+     const setMapRegion = ()=>{
+       return{
+         latitude:parseFloat(latitude),
+         longitude:parseFloat(longitude)
+       }
+     }
+       return (
         <View style={styles.container} >
              <MapView style={styles.map} 
              region={{
-            latitude,
-            longitude,
+               ...setMapRegion(),
             latitudeDelta: 0.04,
             longitudeDelta: 0.04
             
@@ -43,24 +48,14 @@ const LiveMapScreen = () => {
           showsIndoors={false}
           showsCompass={true}
           showsUserLocation={true}
-             />
-              <MapView.Marker
-        key={1}
-        coordinate={{
-            latitude:9.019319505745512, 
-            longitude: 38.80223829742719
-        }}
-        // image={Platform.OS === "ios" ? station_ios : station_android}
-         zIndex={100}
-        tracksInfoWindowChanges={true}
-        title="new text"
-        
-        >
-
-        </MapView.Marker>
-              
+             >
+          <Markers/>
+             </MapView>      
         </View>
     )
+
+     
+    
 }
 
 export default LiveMapScreen

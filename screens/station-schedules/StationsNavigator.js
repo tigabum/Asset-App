@@ -32,7 +32,7 @@ const StationsNavigator = () => {
 
     return (
         <Stack.Navigator
-          initialRouteName="Closest Stations"
+          initialRouteName="StationList"
       screenOptions={{
         gestureEnabled: false
       }}
