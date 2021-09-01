@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import MapView from "react-native-maps";
+
+import CalloutContainer from "./CalloutContainer";
 import station_ios from "../../assets/station_ios.png";
 import station_android from "../../assets/station_android.png";
-import { Platform,View,Text } from "react-native";
-import { useColorScheme } from "react-native-appearance";
-
+import { Platform } from "react-native";
 
 export default function Markers() {
   const {
@@ -13,35 +13,26 @@ export default function Markers() {
 
   const [clickedMarkerRef, setClickedMarkerRef] = useState({});
 
+  return station.map((trainStation, index) => {
     return (
-        <MapView.Marker
-        key={1}
+      <MapView.Marker
+        key={trainStation.abbr}
         coordinate={{
-            latitude:9.019319505745512, 
-            longitude: 38.80223829742719
+          latitude: parseFloat(trainStation.gtfs_latitude),
+          longitude: parseFloat(trainStation.gtfs_longitude)
         }}
         image={Platform.OS === "ios" ? station_ios : station_android}
-         zIndex={100}
+        zIndex={100}
         tracksInfoWindowChanges={true}
-        title="new text"
-        
-        >
-
-        </MapView.Marker> 
-    //   <MapView.Marker
-    //     key={trainStation.abbr}
-    //     coordinate={{
-    //       latitude: parseFloat(trainStation.gtfs_latitude),
-    //       longitude: parseFloat(trainStation.gtfs_longitude)
-    //     }}
-    //     image={Platform.OS === "ios" ? station_ios : station_android}
-    //     zIndex={100}
-    //     tracksInfoWindowChanges={true}
-    //     onPress={() => setClickedMarkerRef(index)}
-    //   >
-       
-    //   </MapView.Marker>
-   
+        onPress={() => setClickedMarkerRef(index)}
+      >
+        <CalloutContainer
+          key={trainStation.abbr}
+          stationName={trainStation.name}
+          stationAbbr={trainStation.abbr}
+          showCallOut={clickedMarkerRef === index}
+        />
+      </MapView.Marker>
     );
-  
+  });
 }

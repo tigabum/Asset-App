@@ -106,7 +106,7 @@ export default function TripPlannerResults(props) {
                     </View>
                     <View>
                       <Text style={[styles.platformText, textStyle]}>
-                        {/* {x["@trainHeadStation"]} Train */} Train
+                        {x["@trainHeadStation"]} Train
                       </Text>
                     </View>
                   </View>
@@ -141,7 +141,7 @@ export default function TripPlannerResults(props) {
                     </View>
                     <View>
                       <Text style={[styles.platformText, textStyle]}>
-                        {/* {x["@trainHeadStation"]} Train */} Train
+                        {x["@trainHeadStation"]} Train 
                       </Text>
                     </View>
                   </View>
@@ -187,8 +187,15 @@ export default function TripPlannerResults(props) {
             </Text>
           </View>
           <View  style={styles.button}>
-             <TouchableOpacity onPress={()=>props.navigation.navigate("reservation")} style={{backgroundColor:'lightgray',padding:10,}} >
-               <Text style={{fontSize:25,}} >Reserve</Text>
+             <TouchableOpacity
+              
+             onPress={()=>props.navigation.navigate("reservation",{
+               depart:trip["@origTimeMin"],
+               arrive:trip["@destTimeMin"],
+               trip:trip
+
+             })} style={{backgroundColor:'black', padding:5,borderRadius:5 }} >
+               <Text style={{fontSize:20,color:'white'}} >Reserve</Text>
              </TouchableOpacity>
 
           </View>

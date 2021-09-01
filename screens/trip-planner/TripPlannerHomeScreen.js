@@ -44,7 +44,7 @@ const TripPlannerHomeScreen = (props) => {
   
   });
   const [destination, setDestination] = useState({
-    name: "Hayo Hulet Mazoria",
+    name: "Hay0 Hulet Mazoria",
       abbr: "19TH",
       gtfs_latitude: "37.808350",
       gtfs_longitude: "-122.268602",
@@ -83,8 +83,8 @@ const TripPlannerHomeScreen = (props) => {
           selectedIndex={selectedIndex}
           tabStyle={{
             borderRadius: 10,
-            borderColor: colorScheme === "dark" ? "black" : "white",
-            backgroundColor: "white",
+            borderColor: colorScheme === "dark" ? "black" : "lightgray",
+            backgroundColor: "lightgray",
             height: 40,
             marginBottom: 5,
             marginTop: 5,
@@ -228,6 +228,7 @@ const TripPlannerHomeScreen = (props) => {
       {Platform.OS === "android" && dateModal && (
         <DateTimePicker
           mode="date"
+          display="calendar"
           value={selectedDate}
           onChange={(event, date) => {
             if (date === undefined) {

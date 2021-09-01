@@ -18,8 +18,14 @@ export default function TripPlannerResultsNavigator(props) {
     fetch(
       `http://api.bart.gov/api/sched.aspx?cmd=${option}&orig=${departure.abbr}&dest=${destination.abbr}&date=${date}&key=MW9S-E7SL-26DU-VV8V&b=1&a=3&time=${time}&l=1&json=y`
     )
-      .then(response => response.json())
-      .then(responseJson => setData(responseJson.root.schedule.request))
+      .then((response) => {
+        // console.log(response.json())
+        return response.json()})
+      .then((responseJson) => {
+        setData(responseJson.root.schedule.request)
+        console.log(responseJson.root.schedule.request)
+      })
+      
       .catch(error =>
         Alert.alert(
           "The server for Trip Planner is down at the moment, please try again later."

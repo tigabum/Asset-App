@@ -39,7 +39,7 @@ const StationList = (props) => {
           </View>
           <View>
             <Text style={[styles.stationDistance, distanceText]}>
-              {item.distance.toFixed(2)} meters
+              {item.distance.toFixed(2)} Kmeters
             </Text>
           </View>
         </TouchableOpacity>
