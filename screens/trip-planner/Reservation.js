@@ -1,43 +1,128 @@
-import React from 'react'
-import { View, Text,TextInput, StyleSheet, KeyboardAvoidingView, TouchableOpacity } from 'react-native'
+import React,{useEffect} from 'react'
+import { View, Text,TextInput, StyleSheet, Dimensions ,KeyboardAvoidingView, TouchableOpacity, Alert } from 'react-native'
+import MapView,{Polyline} from 'react-native-maps';
 import { AntDesign } from '@expo/vector-icons';
+import db from './../../firebase'
+import formValidation from './services/formValidation';
+
+ function Map(props) {
+   let locationOne = props.station.find(item => item.abbr === props.trip.leg[0]["@origin"])
+   let locationTwo =  props.station.find(item => item.abbr === props.trip.leg[0]["@destination"])
+   useEffect(() => {
+      console.log(locationOne, locationTwo)
+   }, [])
+  return (
+    <View>
+      <MapView
+       style={styles.map} 
+       initialRegion={{
+                    "latitude": 9.017796,
+                    "latitudeDelta": 0.0922,
+                    "longitude": 38.815969,
+                    "longitudeDelta": 0.0421,
+                }}
+       >
+         <Polyline
+		coordinates={[
+			{ latitude: 9.017796, longitude: 38.815969 },
+			{ latitude: 8.9806034, longitude: 38.75776050000002 },
+		
+		]}
+		strokeColor="green" // fallback for when `strokeColors` is not supported by the map-provider
+		strokeColors={[
+			'#7F0000',
+			'#00000000', // no color, creates a "long" gradient between the previous and next coordinate
+			'#B24112',
+			'#E5845C',
+			'#238C23',
+			'#7F0000'
+		]}
+    onPress={()=>console.log("name")}
+		strokeWidth={3}
+	/>
+       </MapView>
+    </View>
+  );
+}
 
 const Reservation = (props) => {
-    const [text, onChangeText] = React.useState();
-  const [number, onChangeNumber] = React.useState();
+    // const [text, onChangeText] = React.useState();
+    const [name, onChangeName] = React.useState('');
+  const [phone, onChangePhone] = React.useState('');
   const[values, setValues] = React.useState({
-    plus:1,
-    child:0
+    adult:1,
+    child:0,
   })
-   const {
+  const[seats,setSeats] = React.useState([])
+  const[passengers,setPassengers] = React.useState([])
+  const[nameerror,setError] = React.useState(false)
+     useEffect(() => {
+      db.collection('seats').onSnapshot((snapshot)=>
+      setSeats(snapshot.docs.map((doc)=>({seat:doc.data()}))));
+      
+    }, [])
+     useEffect(() => {
+      db.collection('passengers')
+      .onSnapshot((snapshot)=>{
+        setPassengers(snapshot.docs.map((doc)=>doc.data()))
+      })
+       console.log(passengers.length)
+      
+    }, [])
+
+  const {
     stations: { station }
   } = require("../../TrainData/stations");
 
+  // const handleNameChange = ()=>{
+  //   // setError(false)
+  //   onChangeText()
+  // }
+  // const handleNumberChange = ()=>{
+  //   // setError(false)
+  //   onChangeNumber()
+  // }
   const handleSubmit = ()=>{
-      alert("Reservation completed");
-      props.navigation.navigate("TripPlanner Home")
-  
+    const formValues = getFormValues();
+    console.log(formValues)
+    const validationResult = formValidation(formValues)
+    console.log(validationResult.result)
+    console.log(validationResult.isValid)
+     
+    if(validationResult.isValid){
+         db.collection('passengers').add(formValues)
+      onChangePhone("")
+      onChangeName("")
+      setValues({adult:1,child:0})
+      setError(false)
+       alert("Reservation completed");
+       props.navigation.navigate("QRCodeGenerator")
+
+    }else{
+     setError(true)
     }
-  
+    }
+ 
+  const getFormValues = ()=>{
+    return{
+      name:name,
+      phone:phone,
+      adult:values.adult,
+      child:values.child
+    }
+  }
   const handleAdult = (name)=>(event)=>{
-    const value = name==='plus'? (values.plus+1):(values.plus-1)
-    setValues({...values,plus:value})
+    const value = name==='adult'? (values.adult+1):(values.adult-1)
+    setValues({...values,adult:value})
   }
   const handleChild = (name)=>(event)=>{
-    const value = name ==='plus'?(values.child+1):(values.child-1)
+    const value = name ==='adult'?(values.child+1):(values.child-1)
     setValues({...values,child:value})
 
   }
+ 
     let {route:{params:{trip}}} = props
 
-  // let unknown = trip? (trip.leg.map((item,i)=>{
-  //   console.log(item)
-  //   return  <View key={i} >
-  //     <Text>{item["@origin"]} </Text>
-  //   </View>
-  // }
-   
-  // )):("false")
     return (
         <KeyboardAvoidingView style={styles.container} >
           <View style={{
@@ -82,7 +167,7 @@ const Reservation = (props) => {
              <Text> {trip["@destTimeMin"]}</Text>
              </View>
              </View>
-
+             
              <View style={{marginLeft:150}} >
                <Text>
                  Duration {trip["@tripTime"]} mins
@@ -114,10 +199,10 @@ const Reservation = (props) => {
                  <View>
                     <Text 
                     style={{fontSize:25,marginRight:5}}>
-                      {values.plus<0?(0)
-                      :(values.plus>10
-                      ?(Math.min(10,values.plus))
-                      :(values.plus))}</Text>
+                      {values.adult<0?(0)
+                      :(values.adult>10
+                      ?(Math.min(10,values.adult))
+                      :(values.adult))}</Text>
                   </View>
               <View 
               style={{
@@ -127,18 +212,14 @@ const Reservation = (props) => {
                 padding:5,
                 borderRadius:10
 
-                }}>
-                  
+                }}> 
                   <TouchableOpacity onPress={handleAdult('minus') } style={{padding:5,borderWidth:1,width:50,alignItems:'center'}} >
                     <AntDesign name="minus" size={20} color="black" />
 
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={handleAdult('plus') } style={{padding:5,borderWidth:1,width:50,alignItems:'center'}} >
-                      <AntDesign name="plus" size={20} color="black" />
-
-                  </TouchableOpacity>
-                
-                
+                  <TouchableOpacity onPress={handleAdult('adult') } style={{padding:5,borderWidth:1,width:50,alignItems:'center'}} >
+                      <AntDesign name="plus" size={20} color="black"/>
+                      </TouchableOpacity>
                    </View>
 
               </View>
@@ -175,7 +256,7 @@ const Reservation = (props) => {
                     <AntDesign name="minus" size={20} color="black" />
 
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={handleChild('plus')} style={{padding:5,borderWidth:1,width:50,alignItems:'center'}} >
+                  <TouchableOpacity onPress={handleChild('adult')} style={{padding:5,borderWidth:1,width:50,alignItems:'center'}} >
                       <AntDesign name="plus" size={20} color="black" />
 
                   </TouchableOpacity>
@@ -193,20 +274,31 @@ const Reservation = (props) => {
           <TextInput
           placeholder="Full Name"
         style={styles.input}
-        onChangeText={onChangeText}
-        value={text}
+        onChangeText={(name)=> onChangeName(name) }
+        value={name}
       />
       
       <TextInput
-        style={styles.input}
-        onChangeText={onChangeNumber}
-        value={number}
-        placeholder="Phone Number"
+        style={[styles.input]}
+        onChangeText={(phone)=>onChangePhone(phone) }
+        value={phone}
+        placeholder="XXXX-XXX-XXX"
         keyboardType="numeric"
       />
+      <View style={styles.errorcontainer} >
+        <Text style={styles.errorcontainer} >
+          {
+            nameerror && "Please fill right values"
+          }
+        </Text>
+      </View>
+      <View style={styles.mapContainer} >
+        <Map station={station} trip={trip} />
+        </View>
+     
       <View style={styles.submitcontainer}>
           <TouchableOpacity onPress={handleSubmit}  style={styles.submit} >
-            <Text style={{color:'black'}} >Submit</Text>
+            <Text style={{color:'white',fontWeight:'bold',textTransform:'uppercase'}} >Submit</Text>
         </TouchableOpacity>
 
        
@@ -231,8 +323,19 @@ const styles = StyleSheet.create({
         display:'flex',
         
     },
+    // mapContainer:{
+    //   width:100,
+    //   height:100,
+    //   display:'flex',
+    //   flex:1,
+
+    // },
+    errorName:{
+          borderColor:'red'
+    },
     submit:{
-        backgroundColor:'#edebe6',
+        backgroundColor:'green',
+
         alignItems:'center',
         padding:5,
          width:80,
@@ -251,5 +354,14 @@ const styles = StyleSheet.create({
   },
   topText:{
     display:'flex'
-  }
+  },
+  errorcontainer:{
+    alignItems:'center',
+    color:'red',
+    fontSize:20,
+  },
+    map: {
+    width: '100%',
+    height: 300,
+  },
 })

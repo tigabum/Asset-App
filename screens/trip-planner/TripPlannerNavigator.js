@@ -1,6 +1,7 @@
 import { createStackNavigator, HeaderTitle } from "@react-navigation/stack";
 import React from "react";
 import Reservation from "./Reservation";
+import QRGenerator from "./QrGenerator";
 
 import TripPlannerHomeScreen from "./TripPlannerHomeScreen";
 import TripPlannerResultsNavigator from "./TripPlannerResultsNavigator";
@@ -30,6 +31,11 @@ export default function TripPlannerNavigator() {
       name="reservation"
       component={Reservation}
       options={{title:'Reservation', headerTitleAlign:'center'}}
+      />
+      <Stack.Screen
+      name="QRCodeGenerator"
+      component={QRGenerator}
+      options={{title:'QRCode', headerTitleAlign:'center'}}
       />
     </Stack.Navigator>
   ); 

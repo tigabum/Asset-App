@@ -106,7 +106,7 @@ export default function TripPlannerResults(props) {
                     </View>
                     <View>
                       <Text style={[styles.platformText, textStyle]}>
-                        {x["@trainHeadStation"]} Train
+                        {/* {x["@trainHeadStation"]} Train */}Intermidate
                       </Text>
                     </View>
                   </View>
@@ -141,7 +141,7 @@ export default function TripPlannerResults(props) {
                     </View>
                     <View>
                       <Text style={[styles.platformText, textStyle]}>
-                        {x["@trainHeadStation"]} Train 
+                        {/* {x["@trainHeadStation"]} Train  */} Intermidate
                       </Text>
                     </View>
                   </View>
@@ -199,6 +199,7 @@ export default function TripPlannerResults(props) {
              </TouchableOpacity>
 
           </View>
+        
          
         </View>
       </ScrollView>
