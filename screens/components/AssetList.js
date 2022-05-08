@@ -125,7 +125,8 @@ const AssetList = (props) => {
                 props.navigate("AssetDetails", {
                   id: item.id,
                   name: item.name,
-                  price: item.metrics?.market_data?.price_usd,
+                  price: item.metrics.market_data.price_usd,
+                  item: item
                 })
               }
             >

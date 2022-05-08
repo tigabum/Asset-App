@@ -23,12 +23,6 @@ const AssetsNavigator = () => {
       const dispatch = useDispatch();
       const scheme = useColorScheme();
         const [favorite, setFavorite] = useState({});
-       
-        function updateFavoriteStatus(){
-          Alert.alert("added to favourite")
-
-        }
-      
 
     return (
         <Stack.Navigator
@@ -73,19 +67,6 @@ const AssetsNavigator = () => {
               color={scheme === "dark" ? "white" : "black"}
               style={{ marginLeft: 10 }}
               onPress={() => navigation.goBack()}
-            />
-          ),
-          headerRight: () => (
-            <MaterialIcons
-              name={
-                favorite[route.params.abbr] === "true"
-                  ? "favorite"
-                  : "favorite-border"
-              }
-              size={32}
-              color="black"
-              style={{ marginRight: 10 }}
-              onPress={() => updateFavoriteStatus(route.params.abbr)}
             />
           ),
           headerTitleAlign: "center"
