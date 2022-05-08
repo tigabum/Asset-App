@@ -6,9 +6,7 @@ import { SafeAreaView } from "react-navigation";
 import rootReducer from "./reducers/rootReducer";
 import Navigation from "./Navigation";
 import { useColorScheme } from "react-native-appearance";
-import * as Permissions from 'expo-permissions';
-import * as Location from 'expo-location';
-import LoginAuthenticator from "./LoginAuthenticator";
+
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -23,14 +21,9 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <LoginAuthenticator />
+      <Navigation/>
     </Provider>
   );
 
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//   },
-// });

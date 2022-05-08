@@ -1,5 +1,5 @@
 
-import { View, Text,StyleSheet} from 'react-native'
+import { View, Text,StyleSheet, Alert} from 'react-native'
 import { createStackNavigator } from "@react-navigation/stack";
 import {
   Ionicons,
@@ -11,28 +11,28 @@ import { useColorScheme } from "react-native-appearance";
 import * as SecureStore from "expo-secure-store";
 import { useDispatch } from "react-redux";
 
-import ClosestStationListScreen from "./ClosestStationListScreen";
+import AssetLIstsScreen from "./AssetLIstsScreen";
 import FavoriteListScreen from "./FavoriteListScreen";
-import StationDetailsScreen from "./StationDetailsScreen";
+import AssetDetailsScreen from "./AssetDetailsScreen";
 
 
 const Stack = createStackNavigator();
 
 
-const StationsNavigator = () => {
+const AssetsNavigator = () => {
       const dispatch = useDispatch();
       const scheme = useColorScheme();
         const [favorite, setFavorite] = useState({});
        
         function updateFavoriteStatus(){
-          
+          Alert.alert("added to favourite")
 
         }
       
 
     return (
         <Stack.Navigator
-          initialRouteName="StationList"
+          initialRouteName="Assets Lists"
       screenOptions={{
         gestureEnabled: false
       }}
@@ -44,74 +44,25 @@ const StationsNavigator = () => {
         
         >
             <Stack.Screen
-        name="Closest Stations"
-        component={ClosestStationListScreen}
-        initialParams={{ displaySearchBar: false }}
+        name="Assets Lists"
+        component={AssetLIstsScreen}
+        // initialParams={{ displaySearchBar: false }}
         options={({ route, navigation }) => ({
-          headerRight: () => (
-            <MaterialIcons
-              name="search"
-              size={32}
-              color={scheme === "dark" ? "white" : "black"}
-              style={{ marginRight: 10 }}
-              onPress={() =>
-                dispatch({
-                  type: "SHOW_SEARCH_BAR"
-                })
-              }
-            />
-          ),
-          headerLeft: () => (
-            <MaterialCommunityIcons
-              name="heart-box"
-              size={32}
-              color={scheme === "dark" ? "white" : "black"}
-              style={{ marginLeft: 10 }}
-              onPress={() => {
-                navigation.navigate("Favorite Stations");
-              }}
-            />
-          ),
-          // set title to center for Android (default: left)
           headerTitleAlign: "center"
         })}
       />
            <Stack.Screen
-        name="Favorite Stations"
+        name="Favorite Assets"
         component={FavoriteListScreen}
         initialParams={{ displaySearchBar: false, favorites: favorite }}
         options={({ route, navigation }) => ({
-          headerRight: () => (
-            <MaterialIcons
-              name="search"
-              size={32}
-              color={scheme === "dark" ? "white" : "black"}
-              style={{ marginRight: 10 }}
-              onPress={() =>
-                dispatch({
-                  type: "SHOW_SEARCH_BAR"
-                })
-              }
-            />
-          ),
-          headerLeft: () => (
-            <MaterialCommunityIcons
-              name="map-marker-distance"
-              size={32}
-              color={scheme === "dark" ? "white" : "black"}
-              style={{ marginLeft: 10 }}
-              onPress={() => {
-                navigation.navigate("Closest Stations");
-              }}
-            />
-          ),
           // set title to center for Android (default: left)
-          headerTitleAlign: "center"
+          headerTitleAlign: "center",
         })}
       />
        <Stack.Screen
-        name="StationDetails"
-        component={StationDetailsScreen}
+        name="AssetDetails"
+        component={AssetDetailsScreen}
         options={({ route, navigation }) => ({
           title: route.params.name,
           // headerForceInset: { top: "never", bottom: "never" },
@@ -132,7 +83,7 @@ const StationsNavigator = () => {
                   : "favorite-border"
               }
               size={32}
-              color="red"
+              color="black"
               style={{ marginRight: 10 }}
               onPress={() => updateFavoriteStatus(route.params.abbr)}
             />
@@ -145,7 +96,7 @@ const StationsNavigator = () => {
     )
 }
 
-export default StationsNavigator
+
 const styles = StyleSheet.create({
     container:{
         flex:1,
@@ -158,3 +109,5 @@ const styles = StyleSheet.create({
         padding:5,
     }
 })
+
+export default AssetsNavigator;

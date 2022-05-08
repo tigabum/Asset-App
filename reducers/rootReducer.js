@@ -1,12 +1,13 @@
 import { combineReducers } from "redux";
-import userLocationReducer from "./userLocationReducer";
-import searchBarReducer from "./searchBarReducer";
-import userReducer from "./userReducer";
+import assetsReducer from "./assetsReducer";
+import assetReducer from "./assetReducer";
+import favoritesReducer from "./favoritesReducer";
+
 
 const rootReducer = combineReducers({
-  userLocation: userLocationReducer,
-  searchBar: searchBarReducer,
-  userSession: userReducer
+  assets: assetsReducer,
+  asset: assetReducer,
+  favorites:favoritesReducer,
 });
 
 export default rootReducer;
