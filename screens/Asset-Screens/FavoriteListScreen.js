@@ -141,9 +141,9 @@ const FavoriteListScreen = (props) => {
                 </View>
                 <TouchableOpacity>
                   <TouchableOpacity onPress={() => handleFavourite(item)}>
-                    <MaterialIcons
+                    <Ionicons
                       name={
-                        favourite[item.slug].isFavorite ? "favorite" : "favorite-border"
+                        favourite[item.slug].isFavorite ? "star" : "star-outline"
                       }
                       size={32}
                       color="black"

@@ -121,18 +121,17 @@ const AssetDetailsScreen = (props) => {
           <Text>${props.route.params.price.toFixed(4)}</Text>
         </View>
         <View>
-          <TouchableOpacity onPress={() => handleFavourite()}>
-            <MaterialIcons
+            <Ionicons
+            onPress={() => handleFavourite()}
               name={
               favourite[slug]?.isFavorite === true
-                  ? "favorite"
-                  : "favorite-border"
+                  ? "star"
+                  : "star-outline"
               }
               size={32}
               color="black"
               style={{ marginLeft: 10 }}
             />
-          </TouchableOpacity>
         </View>
       </View>
       {singleAssetPriceTimeSeries.length > 0 ? (
@@ -169,8 +168,8 @@ const AssetDetailsScreen = (props) => {
               },
             ],
           }}
-          width={8 * 10 + 350}
-          height={320}
+          width={4* 10 + 350}
+          height={420}
           verticalLabelRotation={70}
           withInnerLines={false}
           chartConfig={{
@@ -186,7 +185,7 @@ const AssetDetailsScreen = (props) => {
           bezier // type of line chart
         />
       ) : (
-        <View>
+        <View style={styles.loading} >
           <Text>Loading..</Text>
         </View>
       )}
@@ -201,9 +200,15 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
   },
-  namePrice: {},
+  loading: {
+    display:'flex',
+    flex:1,
+    justifyContent: 'center',
+    alignItems:'center',
+    marginLeft:150,
+  },
   card: {
     backgroundColor: "white",
     flexDirection: "row",
@@ -212,7 +217,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     width: "60%",
     marginVertical: 10,
-
+    marginLeft:20,
     justifyContent: "space-between",
   },
   shadowProp: {

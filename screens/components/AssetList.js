@@ -39,7 +39,7 @@ const AssetList = (props) => {
   }, []);
 
   const handleLoadMore = () => {
-    Alert.alert("You are reached end of the page");
+    // Alert.alert("You are reached end of the page");
     dispatch({
       type: "INCREMENT_PAGE",
     });
@@ -148,26 +148,23 @@ const AssetList = (props) => {
               <View>
                 <Text>${item.metrics?.market_data?.price_usd?.toFixed(4)}</Text>
               </View>
-              <TouchableOpacity>
-                <TouchableOpacity onPress={() => handleFavourite(item)}>
-                  <MaterialIcons
+                  <Ionicons
+                  onPress={() => handleFavourite(item)}
                     name={
                       favourite && favourite[item.slug]?.isFavorite
-                        ? "favorite"
-                        : "favorite-border"
+                        ? "star"
+                        : "star-outline"
                     }
-                    size={32}
+                    size={25}
                     color="black"
                     style={{ marginLeft: 10 }}
                   />
-                </TouchableOpacity>
-              </TouchableOpacity>
             </View>
           </View>
         )}
         keyExtractor={(item) => item.id}
         onEndReached={handleLoadMore}
-        onEndReachedThreshold={0}
+        onEndReachedThreshold={0.5}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }

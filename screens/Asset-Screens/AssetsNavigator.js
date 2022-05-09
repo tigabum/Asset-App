@@ -62,7 +62,7 @@ const AssetsNavigator = () => {
           // headerForceInset: { top: "never", bottom: "never" },
           headerLeft: () => (
             <Ionicons
-              name="md-locate"
+              name="list-circle-outline"
               size={32}
               color={scheme === "dark" ? "white" : "black"}
               style={{ marginLeft: 10 }}
