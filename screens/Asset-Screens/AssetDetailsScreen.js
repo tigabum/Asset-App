@@ -66,24 +66,44 @@ const AssetDetailsScreen = (props) => {
   };
 
   const handleFavourite = () => {
-    const slug = props.route.params.item.slug;
-    dispatch({ type: "CHANGE_FAVOURITE", payload: slug });
-    setFavOnLocal(slug);
+    const item = props.route.params.item
+    console.log("handleFavourite called");
+    dispatch({ type: "CHANGE_FAVOURITE", payload: item.slug });
+    setFavOnLocal(item);
+
+    // console.log("item after dispatching", favourite)
+
+    // setOnLocalStorage(item.slug);
   };
 
-  const setFavOnLocal = async (slug) => {
+  const setFavOnLocal = async (item) => {
     // console.log("irem", item.slug)
     // await AsyncStorage.removeItem("key");
     // return;
     const state = await AsyncStorage.getItem("key");
     let stateParsed = await JSON.parse(state);
+    // console.log("local", stateParsed);
+    // console.log("storage state before anything", stateParsed)
 
     let storageExist = stateParsed ?? false;
+    console.log("Storage exists", storageExist);
     if (storageExist) {
-      stateParsed[slug] = !stateParsed[slug];
+      console.log("inverted value", !stateParsed[item.slug]);
+      // stateParsed[item.slug] = !stateParsed[item.slug];
+      stateParsed[item.slug] = item;
+      stateParsed[item.slug].isFavorite = !stateParsed[item.slug].isFavorite;
       await AsyncStorage.setItem("key", JSON.stringify(stateParsed));
+      // console.log("after update with jm", await AsyncStorage.getItem("key"));
     } else {
-      await AsyncStorage.setItem("key", JSON.stringify({ [slug]: true }));
+      // set "true" because there is no element inside storage
+      // console.log("state in storage is empty");
+      await AsyncStorage.setItem("key", JSON.stringify({ [item.slug]: {
+        ...item, isFavorite: true,
+      } }));
+      // console.log(
+      //   "after updating first item",
+      //   await AsyncStorage.getItem("key")
+      // );
     }
     dispatch({ type: "UPDATE_FROM_LOCAL", payload: stateParsed });
   };
@@ -104,7 +124,7 @@ const AssetDetailsScreen = (props) => {
           <TouchableOpacity onPress={() => handleFavourite()}>
             <MaterialIcons
               name={
-                favourite && favourite[slug] === true
+              favourite[slug]?.isFavorite === true
                   ? "favorite"
                   : "favorite-border"
               }
