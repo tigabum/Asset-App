@@ -14,11 +14,45 @@ const AssetDetailsScreen = (props) => {
   const favourite = useSelector((state) => state.asset.favourite);
 
   const dispatch = useDispatch();
-  const singleAssetData = useSelector((state) => state.asset);
+  const singleAssetPriceTimeSeries = useSelector(
+    (state) => state.asset.priceTimeSeries
+  );
 
   useEffect(() => {
     fetchSingleAsset();
+    fetchAssetTimeSeries();
   }, [props.route.params.id]);
+
+  const fetchAssetTimeSeries = () => {
+    const now = Date.now();
+    const start = now - 30 * 24 * 60 * 60 * 1000;
+
+    fetch(
+      `https://data.messari.io/api/v1/assets/${props.route.params.id}/metrics/price/time-series?interval=1d&end=${now}&start=${start}`
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        const changes = [];
+        let [yesterday] = json.data.values;
+
+        json.data.values.slice(1).forEach((day) => {
+          let localChange = [day[0]];
+          for (let i = 1; i < day.length; i++) {
+            localChange[i] = day[i] - yesterday[i];
+          }
+          yesterday = day;
+          changes.push(localChange);
+        });
+        
+        
+
+        dispatch({
+          type: "ADD_ASSET_PRICE_TIME_SERIES",
+          payload: changes,
+        });
+      })
+      .catch((err) => console.log("error in fetchAssetTimeSeries", err));
+  };
 
   const fetchSingleAsset = () => {
     fetch(
@@ -81,33 +115,61 @@ const AssetDetailsScreen = (props) => {
           </TouchableOpacity>
         </View>
       </View>
-      <LineChart
-        data={{
-          labels: ["Jun", "May", "Apr", "Mar", "Feb", "Jan"], //Array of labels [Jun 21,May 21,Apr 21,Mar 21,Feb 21,Jan 21]
-          datasets: [
-            {
-              data: [4.3, 4.8, 5, 5, 4.9, 4.8], //Array of values
-              color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
-              strokeWidth: 2, // optional
-            },
-          ],
-        }}
-        width={8* 10 + 350}
-        height={320}
-        verticalLabelRotation={70}
-        withInnerLines={false}
-        chartConfig={{
-          backgroundGradientFrom: 0,
-          backgroundGradientFromOpacity: 0,
-          backgroundGradientTo: 0,
-          backgroundGradientToOpacity: 0,
-          color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-          backgroundColor: (opacity = 0) => `rgba(255, 255, 255, ${opacity})`,
-          strokeWidth: 2, // optional, default 3
-        }}
-        bezier // type of line chart
-      />
+      {singleAssetPriceTimeSeries.length > 0 ? (
+        <LineChart
+          data={{
+            labels: singleAssetPriceTimeSeries.map(each => new Date(each[0])), 
+            legend: [
+              "open",
+                "high",
+                "low",
+                "close",
+            ],//Array of labels [Jun 21,May 21,Apr 21,Mar 21,Feb 21,Jan 21]
+            datasets: [
+              {
+                data: singleAssetPriceTimeSeries.map((each) => each[1]), //Array of values
+                color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
+                strokeWidth: 2, // optional
+
+              },
+              {
+                data: singleAssetPriceTimeSeries.map((each) => each[2]), //Array of values
+                color: (opacity = 1) => `rgba(65,134, 244, ${opacity})`, // optional
+                strokeWidth: 2, // optional
+              },
+              {
+                data: singleAssetPriceTimeSeries.map((each) => each[3]), //Array of values
+                color: (opacity = 1) => `rgba(244,134, 65, ${opacity})`, // optional
+                strokeWidth: 2, // optional
+              },
+              {
+                data: singleAssetPriceTimeSeries.map((each) => each[4]), //Array of values
+                color: (opacity = 1) => `rgba(134, 244, 65, ${opacity})`, // optional
+                strokeWidth: 2, // optional
+              },
+            ],
+          }}
+          width={8 * 10 + 350}
+          height={320}
+          verticalLabelRotation={70}
+          withInnerLines={false}
+          chartConfig={{
+            backgroundGradientFrom: 0,
+            backgroundGradientFromOpacity: 0,
+            backgroundGradientTo: 0,
+            backgroundGradientToOpacity: 0,
+            color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+            labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+            backgroundColor: (opacity = 0) => `rgba(255, 255, 255, ${opacity})`,
+            strokeWidth: 2, // optional, default 3
+          }}
+          bezier // type of line chart
+        />
+      ) : (
+        <View>
+          <Text>Loading..</Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -130,7 +192,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     width: "60%",
     marginVertical: 10,
-    
+
     justifyContent: "space-between",
   },
   shadowProp: {
