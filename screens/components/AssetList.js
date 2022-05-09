@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Alert,
   RefreshControl,
-  ImageBackground
+  ImageBackground,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useColorScheme } from "react-native-appearance";
@@ -46,30 +46,38 @@ const AssetList = (props) => {
   };
 
   const setFavOnLocal = async (item) => {
-    // console.log("irem", item.slug)
-    // await AsyncStorage.removeItem("key");
-    // return;
-    const state = await AsyncStorage.getItem("key");
-    let stateParsed = await JSON.parse(state);
-    console.log("local", stateParsed);
-    // console.log("storage state before anything", stateParsed)
-
-    let storageExist = stateParsed ?? false;
-    if (storageExist) {
-      stateParsed[item.slug] = !stateParsed[item.slug];
-      await AsyncStorage.setItem("key", JSON.stringify(stateParsed));
-      // console.log("after update with jm", await AsyncStorage.getItem("key"));
-    } else {
-      // set "true" because there is no element inside storage
-      // console.log("state in storage is empty");
-      await AsyncStorage.setItem("key", JSON.stringify({ [item.slug]: true }));
-      // console.log(
-      //   "after updating first item",
-      //   await AsyncStorage.getItem("key")
-      // );
-    }
-    dispatch({ type: "UPDATE_FROM_LOCAL", payload: stateParsed });
-  };
+      // console.log("irem", item.slug)
+      // await AsyncStorage.removeItem("key");
+      // return;
+      const state = await AsyncStorage.getItem("key");
+      let stateParsed = await JSON.parse(state);
+      // console.log("local", stateParsed);
+      // console.log("storage state before anything", stateParsed)
+  
+      let storageExist = stateParsed ?? false;
+      console.log("Storage exists", storageExist);
+      if (storageExist) {
+        console.log("myinvertedval", item.slug);
+        // stateParsed[item.slug] = !stateParsed[item.slug];
+        const prevFavoriteValue = stateParsed[item.slug] && stateParsed[item.slug].isFavorite;
+        stateParsed[item.slug] = item;
+        stateParsed[item.slug].isFavorite = !prevFavoriteValue;
+        
+        await AsyncStorage.setItem("key", JSON.stringify(stateParsed));
+        // console.log("after update with jm", await AsyncStorage.getItem("key"));
+      } else {
+        // set "true" because there is no element inside storage
+        // console.log("state in storage is empty");
+        await AsyncStorage.setItem("key", JSON.stringify({ [item.slug]: {
+          ...item, isFavorite: true,
+        } }));
+        // console.log(
+        //   "after updating first item",
+        //   await AsyncStorage.getItem("key")
+        // );
+      }
+      dispatch({ type: "UPDATE_FROM_LOCAL", payload: stateParsed });
+    };
 
   const onRefresh = () => {
     // refreshindicator
@@ -126,7 +134,7 @@ const AssetList = (props) => {
                   id: item.id,
                   name: item.name,
                   price: item.metrics.market_data.price_usd,
-                  item: item
+                  item: item,
                 })
               }
             >
@@ -144,7 +152,7 @@ const AssetList = (props) => {
                 <TouchableOpacity onPress={() => handleFavourite(item)}>
                   <MaterialIcons
                     name={
-                      favourite && favourite[item.slug] === true
+                      favourite && favourite[item.slug]?.isFavorite
                         ? "favorite"
                         : "favorite-border"
                     }
@@ -167,9 +175,9 @@ const AssetList = (props) => {
     );
   } else {
     return (
-     <View style={styles.loading}> 
-       <Text>Loading...</Text>
-     </View>
+      <View style={styles.loading}>
+        <Text>Loading...</Text>
+      </View>
     );
   }
 };
@@ -197,8 +205,8 @@ const styles = StyleSheet.create({
   },
   loading: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center",
   },
   stationTitle: {
     fontSize: 20,
