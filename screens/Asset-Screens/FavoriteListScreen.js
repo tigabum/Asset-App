@@ -25,35 +25,24 @@ import {
 const FavoriteListScreen = (props) => {
   const navigation = useNavigation();
 
-  const assets = useSelector(state => state.assets.product)
   const favourite = useSelector(state => state.asset.favourite)
+  console.log("Favorite", favourite);
   // const listOfFavourites = useSelector(state => state.favouritelists)
   const[listOfFavourites, setListOfFavourites] = useState([])
+  const assetLists = useSelector((state) => state.assets.product);
 
   const dispatch = useDispatch();
   let flatlistItem = [];
 
   useEffect( () => {
+    console.log("use Effect running...");
     getFromLocalStorage();
-    console.log("favo from redux right", listOfFavourites)
+    // console.log("favo from redux right", listOfFavourites)
     // filterFavouriteItem();
-  }, [favourite])
+  }, [favourite, assetLists])
   
-  // useEffect(() => {
-  //   // console.log("ASsets from favourite screen", assets)
-  //   // listAssetsFromRedux(assets);
-  // }, [])
 
-
-  // favorite stations
-
-  // const isFocused = useIsFocused();
-
-  // const setFlatList = () => {
-  //   console.log("setting flat list", listOfFavourites);
-  // }
   const colorScheme = useColorScheme();
-  const assetLists = useSelector((state) => state.assets.product);
   
   // const state = await AsyncStorage.getItem("key");
   
@@ -65,14 +54,16 @@ const FavoriteListScreen = (props) => {
 
     
     const getFromLocalStorage = async () => {
-        const state = JSON.parse(await AsyncStorage.getItem("key"));
+        const state = JSON.parse(await AsyncStorage.getItem("key")) ?? {};
           // console.log("the state => ", state)
-          let onlyTrue = Object.keys(state).filter(item => state[item])
+          let onlyTrue = Object.values(state).filter(item => item.isFavorite);
+          console.log("ONLY TRUE", onlyTrue);
+          // let favorite_assetsList = Object.keys(state).filter(item => state[item]).map(name => state[name]);
           // console.log("True local host => ",onlyTrue)
-          let favorite_assetsList = assetLists.filter(asset => onlyTrue.includes(asset.slug))
+          // let favorite_assetsList = assetLists.filter(asset => onlyTrue.includes(asset.slug))
           // console.log("before redux", favorite_assetsList);
-          dispatch({type:"FAVOURITE_LISTS_SCREEN", payload: favorite_assetsList})
-          setListOfFavourites(favorite_assetsList)
+          dispatch({type:"FAVOURITE_LISTS_SCREEN", payload: onlyTrue})
+          setListOfFavourites(onlyTrue);
           
     }
 
@@ -82,18 +73,24 @@ const FavoriteListScreen = (props) => {
       // return;
       const state = await AsyncStorage.getItem("key");
       let stateParsed = await JSON.parse(state);
-      console.log("local", stateParsed);
+      // console.log("local", stateParsed);
       // console.log("storage state before anything", stateParsed)
   
       let storageExist = stateParsed ?? false;
+      console.log("Storage exists", storageExist);
       if (storageExist) {
-        stateParsed[item.slug] = !stateParsed[item.slug];
+        console.log("inverted value", !stateParsed[item.slug]);
+        // stateParsed[item.slug] = !stateParsed[item.slug];
+        stateParsed[item.slug] = item;
+        stateParsed[item.slug].isFavorite = !stateParsed[item.slug].isFavorite;
         await AsyncStorage.setItem("key", JSON.stringify(stateParsed));
         // console.log("after update with jm", await AsyncStorage.getItem("key"));
       } else {
         // set "true" because there is no element inside storage
         // console.log("state in storage is empty");
-        await AsyncStorage.setItem("key", JSON.stringify({ [item.slug]: true }));
+        await AsyncStorage.setItem("key", JSON.stringify({ [item.slug]: {
+          ...item, isFavorite: true,
+        } }));
         // console.log(
         //   "after updating first item",
         //   await AsyncStorage.getItem("key")
@@ -103,8 +100,8 @@ const FavoriteListScreen = (props) => {
     };
 
     const handleFavourite = (item, e) => {
+      console.log("handleFavourite called");
       dispatch({ type: "CHANGE_FAVOURITE", payload: item.slug });
-      // console.log(item.slug)
       setFavOnLocal(item);
   
       // console.log("item after dispatching", favourite)
@@ -146,7 +143,7 @@ const FavoriteListScreen = (props) => {
                   <TouchableOpacity onPress={() => handleFavourite(item)}>
                     <MaterialIcons
                       name={
-                        favourite[item.slug] ? "favorite" : "favorite-border"
+                        favourite[item.slug].isFavorite ? "favorite" : "favorite-border"
                       }
                       size={32}
                       color="black"

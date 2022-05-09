@@ -3,12 +3,15 @@ import { View,Text, StyleSheet } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { getDistance, convertDistance } from "geolib";
 import { useColorScheme } from "react-native-appearance";
+import { useNavigation } from '@react-navigation/native';
 
 import AssetList from "../components/AssetList";
 
 
 
 const AssetLIstsScreen = (props) => {
+  const navigation = useNavigation();
+  
   const dispatch = useDispatch();
      const colorScheme = useColorScheme();
  
@@ -27,7 +30,7 @@ const AssetLIstsScreen = (props) => {
 
 
   const fetchAssets = ( ) => {
-  
+    
     fetch(`https://data.messari.io/api/v1/assets?page=${pageNumber}`)
     .then(res => res.json())
     .then(json => {
