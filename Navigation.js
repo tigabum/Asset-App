@@ -21,31 +21,50 @@ export default function Navigation() {
 
   return (
     <NavigationContainer theme={scheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Tab.Navigator initialRouteName="Assets Lists">
+      <Tab.Navigator initialRouteName="Assets Lists"
+      screenOptions={({route}) => ({
+        headerTitle: () => <Text>Header</Text>,
+        tabBarIcon: ({focused, color, size, padding}) => {
+          let iconName;
+          if(route.name === 'Home'){
+            iconName = focused ? 'home' : 'home-outline';
+          }else if(route.name === 'Favourite') {
+            iconName = focused 
+            ? 'star'
+            : 'star-outline'
+          }
+            return <Ionicons name={iconName} size={size} color="black" style={{paddingBottom: padding}}/>
+        },
+        
+      })}
+      >
         <Tab.Screen
           name="Home"
           component={AssetsNavigator}
-          options={{
-            tabBarIcon: () => (
-              <Ionicons
-                name="md-list"
-                size={28}
-                color={iconColor}
-                style={styles.tabIcon}
-              />
-            ),
-          }}
+          // options={{
+          //   tabBarIcon: () => (
+          //     <Ionicons
+          //       name="md-list"
+          //       size={28}
+          //       color={iconColor}
+          //       style={styles.tabIcon}
+          //     />
+          //   ),
+          // }}
         />
         <Tab.Screen
           name="Favourite"
+        
           component={FavoriteListScreen}
-          options={{
-            tabBarIcon: () => (
-              <MaterialIcons name="favorite" size={24} color="black" />
-            ),
+          // options={{
+          //   tabBarIcon: () => (
+          //     <MaterialIcons name="favorite" size={24} color="black" />
+          //   ),
+          //   headerTitle: () => <Text>Favo</Text>
+            
             
 
-          }}
+          // }}
         />
       </Tab.Navigator>
     </NavigationContainer>

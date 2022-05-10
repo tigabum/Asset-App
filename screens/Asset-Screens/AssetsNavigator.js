@@ -22,7 +22,6 @@ const Stack = createStackNavigator();
 const AssetsNavigator = () => {
       const dispatch = useDispatch();
       const scheme = useColorScheme();
-        const [favorite, setFavorite] = useState({});
 
     return (
         <Stack.Navigator
@@ -48,9 +47,8 @@ const AssetsNavigator = () => {
            <Stack.Screen
         name="Favorite Assets"
         component={FavoriteListScreen}
-        initialParams={{ displaySearchBar: false, favorites: favorite }}
         options={({ route, navigation }) => ({
-          // set title to center for Android (default: left)
+          title: "Favour",
           headerTitleAlign: "center",
         })}
       />
@@ -58,11 +56,10 @@ const AssetsNavigator = () => {
         name="AssetDetails"
         component={AssetDetailsScreen}
         options={({ route, navigation }) => ({
-          title: route.params.name,
-          // headerForceInset: { top: "never", bottom: "never" },
+          title: "Asset Details",
           headerLeft: () => (
             <Ionicons
-              name="md-locate"
+              name="list-circle-outline"
               size={32}
               color={scheme === "dark" ? "white" : "black"}
               style={{ marginLeft: 10 }}

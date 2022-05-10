@@ -30,11 +30,11 @@ const AssetLIstsScreen = (props) => {
 
 
   const fetchAssets = ( ) => {
-    
+
     fetch(`https://data.messari.io/api/v1/assets?page=${pageNumber}`)
     .then(res => res.json())
     .then(json => {
-      console.log("ASsets list is:", json.data.map((item)=>item.name))
+      // console.log("ASsets list is:", json.data.map((item)=>item.name))
       // let asAsetData = json.data
       let totalArray ;
       if(pageNumber === 1 ){
