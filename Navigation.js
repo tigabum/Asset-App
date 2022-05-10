@@ -41,30 +41,10 @@ export default function Navigation() {
         <Tab.Screen
           name="Home"
           component={AssetsNavigator}
-          // options={{
-          //   tabBarIcon: () => (
-          //     <Ionicons
-          //       name="md-list"
-          //       size={28}
-          //       color={iconColor}
-          //       style={styles.tabIcon}
-          //     />
-          //   ),
-          // }}
         />
         <Tab.Screen
           name="Favourite"
-        
           component={FavoriteListScreen}
-          // options={{
-          //   tabBarIcon: () => (
-          //     <MaterialIcons name="favorite" size={24} color="black" />
-          //   ),
-          //   headerTitle: () => <Text>Favo</Text>
-            
-            
-
-          // }}
         />
       </Tab.Navigator>
     </NavigationContainer>

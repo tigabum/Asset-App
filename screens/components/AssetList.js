@@ -13,7 +13,6 @@ import {
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useColorScheme } from "react-native-appearance";
 import { useSelector, useDispatch } from "react-redux";
-import * as SecureStore from "expo-secure-store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import {
@@ -137,7 +136,7 @@ const AssetList = (props) => {
   const titleText =
     colorScheme === "dark" ? styles.darkTitle : styles.lightTitle;
   const distanceText =
-    colorScheme === "dark" ? styles.darkDistance : styles.lightDistance;
+    colorScheme === "dark" ? styles.darkList : styles.lightList;
   const borderColor = colorScheme === "dark" ? "#2E2A2A" : "#DFE5E7";
 
   if (props.assetLists.length > 0) {
@@ -238,14 +237,11 @@ const styles = StyleSheet.create({
   darkTitle: {
     color: "white",
   },
-  lightDistance: {
+  lightList: {
     color: "black",
   },
-  darkDistance: {
+  darkList: {
     color: "white",
-  },
-  stationDistance: {
-    fontSize: 12,
   },
 });
 
