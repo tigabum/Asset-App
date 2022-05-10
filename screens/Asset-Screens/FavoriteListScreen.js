@@ -102,20 +102,8 @@ const FavoriteListScreen = (props) => {
     return (
       <SafeAreaView>
         <View style={{ marginTop: 20 }}>
-          {/* <View
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#e6e8eb",
-              padding: 5,
-            }}
-          >
-            <Text style={{ fontSize: 18 }}>Favourite items</Text>
-          </View> */}
           <FlatList
             style={{ width: "100%" }}
-            // filter data by the query input
             data={listOfFavourites}
             initialNumToRender={15}
             renderItem={({ item }) => (
@@ -158,11 +146,6 @@ const FavoriteListScreen = (props) => {
               </View>
             )}
             keyExtractor={(item) => item.id+item.slug}
-            // onEndReached={handleLoadMore}
-            // onEndReachedThreshold={1}
-            // refreshControl={
-            //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            // }
           />
         </View>
       </SafeAreaView>
@@ -184,10 +167,6 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   mainContainer: {
-    // flex: 1,
-    // display: "flex",
-    // flexDirection: "row",
-    // justifyContent: "space-between",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
@@ -197,10 +176,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
     width: "50%",
-    // display: "flex",
-    // flexDirection: "row",
-    // justifyContent: "space-between",
-    // alignItems: "center",
   },
   button: {
     height: 45,

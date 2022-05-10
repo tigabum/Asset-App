@@ -17,11 +17,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import {
   LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart,
 } from "react-native-chart-kit";
 
 const AssetDetailsScreen = (props) => {
@@ -171,7 +166,7 @@ const AssetDetailsScreen = (props) => {
             width={Dimensions.get("window").width}
             height={450}
 
-            verticalLabelRotation={20}
+            verticalLabelRotation={0}
             // withInnerLines={false}
             chartConfig={{
               // backgroundGradientFrom: 0,
