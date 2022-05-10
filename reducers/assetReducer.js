@@ -14,17 +14,6 @@ const initialState = {
         return {...state, priceTimeSeries:action.payload};
       case "CHANGE_FAVOURITE":
         return {...state, favourite:{...state.favourite, [action.payload]:!state.favourite[action.payload]}}
-        // return {...state, favourite:{...state.favourite, [action.payload]: {
-        //   ...(state.favourite[action.payload] || {}),
-        //   ...action.payload,
-        //   isFavored: !state.favourite[action.payload],
-        // }}}
-      // case "FAVOURITE_FALSE":
-      //   return {...state, favourite:{...state.favourite, [action.payload]: false}}
-      // case "FAV_TRUE":
-      //   return {...state, favourite:{...state.favourite, [action.payload]: true}}
-      // case "FAV_FALSE":
-      //   return {...state, favourite:{...state.favourite, [action.payload]: false}}
       case "UPDATE_FROM_LOCAL":
         return {...state, favourite:action.payload || {}}
       default:

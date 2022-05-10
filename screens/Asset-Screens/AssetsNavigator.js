@@ -1,10 +1,9 @@
-
-import { View, Text,StyleSheet, Alert} from 'react-native'
+import { View, Text, StyleSheet, Alert } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
   Ionicons,
   MaterialIcons,
-  MaterialCommunityIcons
+  MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import React, { useState, useEffect } from "react";
 import { useColorScheme } from "react-native-appearance";
@@ -14,36 +13,33 @@ import AssetLIstsScreen from "./AssetLIstsScreen";
 import FavoriteListScreen from "./FavoriteListScreen";
 import AssetDetailsScreen from "./AssetDetailsScreen";
 
-
 const Stack = createStackNavigator();
 
-
 const AssetsNavigator = () => {
-      const dispatch = useDispatch();
-      const scheme = useColorScheme();
+  const dispatch = useDispatch();
+  const scheme = useColorScheme();
 
-    return (
-        <Stack.Navigator
-          initialRouteName="Assets Lists"
+  return (
+    <Stack.Navigator
+      initialRouteName="Assets Lists"
       screenOptions={{
-        gestureEnabled: false
+        gestureEnabled: false,
       }}
       screenOptions={{
         headerTitleStyle: {
-          fontSize: 18
-        }
+          fontSize: 18,
+        },
       }}
-        
-        >
-            <Stack.Screen
+    >
+      <Stack.Screen
         name="Assets Lists"
         component={AssetLIstsScreen}
         // initialParams={{ displaySearchBar: false }}
         options={({ route, navigation }) => ({
-          headerTitleAlign: "center"
+          headerTitleAlign: "center",
         })}
       />
-           <Stack.Screen
+      <Stack.Screen
         name="Favorite Assets"
         component={FavoriteListScreen}
         options={({ route, navigation }) => ({
@@ -51,7 +47,7 @@ const AssetsNavigator = () => {
           headerTitleAlign: "center",
         })}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="AssetDetails"
         component={AssetDetailsScreen}
         options={({ route, navigation }) => ({
@@ -65,26 +61,24 @@ const AssetsNavigator = () => {
               onPress={() => navigation.goBack()}
             />
           ),
-          headerTitleAlign: "center"
+          headerTitleAlign: "center",
         })}
       />
-
-        </Stack.Navigator>
-    )
-}
-
+    </Stack.Navigator>
+  );
+};
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
-          backgroundColor:'#eee',
-         padding:5,
-          borderWidth:1,
-    },
-    text:{
-        color:'black',
-        padding:5,
-    }
-})
+  container: {
+    flex: 1,
+    backgroundColor: "#eee",
+    padding: 5,
+    borderWidth: 1,
+  },
+  text: {
+    color: "black",
+    padding: 5,
+  },
+});
 
 export default AssetsNavigator;
