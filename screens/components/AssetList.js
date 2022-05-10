@@ -7,6 +7,8 @@ import {
   Alert,
   RefreshControl,
   ImageBackground,
+  ActivityIndicator,
+  ScrollView,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useColorScheme } from "react-native-appearance";
@@ -19,6 +21,7 @@ import {
   MaterialIcons,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
+import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 function wait(timeout) {
   return new Promise((resolve) => {
@@ -46,38 +49,45 @@ const AssetList = (props) => {
   };
 
   const setFavOnLocal = async (item) => {
-      // console.log("irem", item.slug)
-      // await AsyncStorage.removeItem("key");
-      // return;
-      const state = await AsyncStorage.getItem("key");
-      let stateParsed = await JSON.parse(state);
-      // console.log("local", stateParsed);
-      // console.log("storage state before anything", stateParsed)
-  
-      let storageExist = stateParsed ?? false;
-      console.log("Storage exists", storageExist);
-      if (storageExist) {
-        console.log("myinvertedval", item.slug);
-        // stateParsed[item.slug] = !stateParsed[item.slug];
-        const prevFavoriteValue = stateParsed[item.slug] && stateParsed[item.slug].isFavorite;
-        stateParsed[item.slug] = item;
-        stateParsed[item.slug].isFavorite = !prevFavoriteValue;
-        
-        await AsyncStorage.setItem("key", JSON.stringify(stateParsed));
-        // console.log("after update with jm", await AsyncStorage.getItem("key"));
-      } else {
-        // set "true" because there is no element inside storage
-        // console.log("state in storage is empty");
-        await AsyncStorage.setItem("key", JSON.stringify({ [item.slug]: {
-          ...item, isFavorite: true,
-        } }));
-        // console.log(
-        //   "after updating first item",
-        //   await AsyncStorage.getItem("key")
-        // );
-      }
-      dispatch({ type: "UPDATE_FROM_LOCAL", payload: stateParsed });
-    };
+    // console.log("irem", item.slug)
+    // await AsyncStorage.removeItem("key");
+    // return;
+    const state = await AsyncStorage.getItem("key");
+    let stateParsed = await JSON.parse(state);
+    // console.log("local", stateParsed);
+    // console.log("storage state before anything", stateParsed)
+
+    let storageExist = stateParsed ?? false;
+    // console.log("Storage exists", storageExist);
+    if (storageExist) {
+      // console.log("myinvertedval", item.slug);
+      // stateParsed[item.slug] = !stateParsed[item.slug];
+      const prevFavoriteValue =
+        stateParsed[item.slug] && stateParsed[item.slug].isFavorite;
+      stateParsed[item.slug] = item;
+      stateParsed[item.slug].isFavorite = !prevFavoriteValue;
+
+      await AsyncStorage.setItem("key", JSON.stringify(stateParsed));
+      // console.log("after update with jm", await AsyncStorage.getItem("key"));
+    } else {
+      // set "true" because there is no element inside storage
+      // console.log("state in storage is empty");
+      await AsyncStorage.setItem(
+        "key",
+        JSON.stringify({
+          [item.slug]: {
+            ...item,
+            isFavorite: true,
+          },
+        })
+      );
+      // console.log(
+      //   "after updating first item",
+      //   await AsyncStorage.getItem("key")
+      // );
+    }
+    dispatch({ type: "UPDATE_FROM_LOCAL", payload: stateParsed });
+  };
 
   const onRefresh = () => {
     // refreshindicator
@@ -113,6 +123,17 @@ const AssetList = (props) => {
     // setOnLocalStorage(item.slug);
   };
 
+  const Footer_Component = () => {
+    return (
+      <View>
+        {/* <Text>Load More</Text> */}
+        {props.assetLists.length > 0 ? (
+          <ActivityIndicator size="small" color="#294754" />
+        ) : null}
+      </View>
+    );
+  };
+
   const titleText =
     colorScheme === "dark" ? styles.darkTitle : styles.lightTitle;
   const distanceText =
@@ -138,42 +159,42 @@ const AssetList = (props) => {
                 })
               }
             >
-              <View>
-                <Text style={[styles.stationTitle, titleText]}>
-                  {item.name}
-                </Text>
+              <View style={{ maxWidth: 115 }}>
+                <Text numberOfLines = {1} ellipsizeMode = 'tail' style={[styles.assetTitle, titleText]}>{item.name}</Text>
               </View>
             </TouchableOpacity>
             <View style={styles.rightContainer}>
-              <View>
-                <Text>${item.metrics?.market_data?.price_usd?.toFixed(4)}</Text>
+              <View style={{ width: "50%" }}>
+                <Text>${item.metrics?.market_data?.price_usd?.toFixed(3)}</Text>
               </View>
-                  <Ionicons
-                  onPress={() => handleFavourite(item)}
-                    name={
-                      favourite && favourite[item.slug]?.isFavorite
-                        ? "star"
-                        : "star-outline"
-                    }
-                    size={25}
-                    color="black"
-                    style={{ marginLeft: 10 }}
-                  />
+              <Ionicons
+                onPress={() => handleFavourite(item)}
+                name={
+                  favourite && favourite[item.slug]?.isFavorite
+                    ? "star"
+                    : "star-outline"
+                }
+                size={25}
+                color="black"
+                style={{ marginLeft: 10 }}
+              />
             </View>
           </View>
         )}
         keyExtractor={(item) => item.id}
         onEndReached={handleLoadMore}
-        onEndReachedThreshold={0.5}
+        onEndReachedThreshold={1}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
+        ListFooterComponent={Footer_Component}
+        // ListFooterComponentStyle={styles.footerStyle}
       />
     );
   } else {
     return (
       <View style={styles.loading}>
-        <Text>Loading...</Text>
+        <ActivityIndicator size="large" color="#294754" />
       </View>
     );
   }
@@ -181,16 +202,19 @@ const AssetList = (props) => {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    flex: 1,
+    // flex:0,
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    // backgroundColor: 'red'
   },
   rightContainer: {
-    display: "flex",
+    width: "50%",
+    // display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
     alignItems: "center",
+    // backgroundColor:'blue'
   },
   button: {
     height: 45,
@@ -205,7 +229,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  stationTitle: {
+  assetTitle: {
     fontSize: 20,
   },
   lightTitle: {
