@@ -1,7 +1,6 @@
 import React, { useState, useLayoutEffect, useEffect } from "react";
 import { View,Text, StyleSheet } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { getDistance, convertDistance } from "geolib";
 import { useColorScheme } from "react-native-appearance";
 import { useNavigation } from '@react-navigation/native';
 
@@ -83,33 +82,7 @@ const styles = StyleSheet.create({
   darkContainer: {
     backgroundColor: "black"
   },
-  searchBar: {
-    flexDirection: "row",
-    height: 40,
-    borderWidth: 1,
-    width: "95%",
-    borderColor: "#E6E8ED",
-    borderRadius: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 5,
-    marginTop: 5
-  },
-  lightSearchBar: {
-    backgroundColor: "#E6E8ED"
-  },
-  darkSearchBar: {
-    backgroundColor: "#434447"
-  },
-  serviceAdvisory: {
-    backgroundColor: "red",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    height: 30
-  }
+ 
 });
 
 

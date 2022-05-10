@@ -12,7 +12,6 @@ import {
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useColorScheme } from "react-native-appearance";
 import { useSelector, useDispatch } from "react-redux";
-import * as SecureStore from "expo-secure-store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 

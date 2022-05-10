@@ -8,7 +8,6 @@ import {
 } from "@expo/vector-icons";
 import React, { useState, useEffect } from "react";
 import { useColorScheme } from "react-native-appearance";
-import * as SecureStore from "expo-secure-store";
 import { useDispatch } from "react-redux";
 
 import AssetLIstsScreen from "./AssetLIstsScreen";
